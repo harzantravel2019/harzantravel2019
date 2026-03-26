@@ -1,23 +1,34 @@
+import { useState, useEffect } from "react";
 import { Users, TrendingUp, TrendingDown, DollarSign, ArrowUpRight, ArrowDownRight } from "lucide-react";
-import { getClients, getTransactions } from "@/lib/store";
+import { fetchClients, fetchTransactions, Client, Transaction } from "@/lib/db";
+import { toast } from "sonner";
 
 export default function Dashboard() {
-  const clients = getClients();
-  const transactions = getTransactions();
-  const totalDebts = transactions.filter(t => t.type === 'debt').reduce((s, t) => s + t.amount, 0);
-  const totalPayments = transactions.filter(t => t.type === 'payment').reduce((s, t) => s + t.amount, 0);
+  const [clients, setClients] = useState<Client[]>([]);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    Promise.all([fetchClients(), fetchTransactions()])
+      .then(([c, t]) => { setClients(c); setTransactions(t); })
+      .catch((e: any) => toast.error(e.message))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const totalDebts = transactions.filter(t => t.type === "debt").reduce((s, t) => s + t.amount, 0);
+  const totalPayments = transactions.filter(t => t.type === "payment").reduce((s, t) => s + t.amount, 0);
   const outstanding = totalDebts - totalPayments;
 
   const stats = [
-    { label: 'Total Clients', value: clients.length.toString(), icon: Users, gradient: 'brand-gradient', lightBg: 'brand-gradient-light' },
-    { label: 'Total Debts', value: `$${totalDebts.toLocaleString()}`, icon: TrendingDown, gradient: 'bg-destructive', lightBg: 'bg-destructive/8' },
-    { label: 'Total Payments', value: `$${totalPayments.toLocaleString()}`, icon: TrendingUp, gradient: 'bg-success', lightBg: 'bg-success/8' },
-    { label: 'Outstanding', value: `$${outstanding.toLocaleString()}`, icon: DollarSign, gradient: 'bg-accent', lightBg: 'bg-accent/8' },
+    { label: "Total Clients", value: clients.length.toString(), icon: Users, lightBg: "brand-gradient-light" },
+    { label: "Total Debts", value: `$${totalDebts.toLocaleString()}`, icon: TrendingDown, lightBg: "bg-destructive/8" },
+    { label: "Total Payments", value: `$${totalPayments.toLocaleString()}`, icon: TrendingUp, lightBg: "bg-success/8" },
+    { label: "Outstanding", value: `$${outstanding.toLocaleString()}`, icon: DollarSign, lightBg: "bg-accent/8" },
   ];
 
-  const recentTxns = transactions
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 8);
+  const recentTxns = [...transactions].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 8);
+
+  if (loading) return <div className="animate-fade-in p-8 text-center text-muted-foreground">Loading...</div>;
 
   return (
     <div className="animate-fade-in space-y-6">
@@ -50,29 +61,25 @@ export default function Dashboard() {
               <DollarSign className="h-5 w-5 text-primary" />
             </div>
             <p className="text-muted-foreground text-sm">No transactions yet.</p>
-            <p className="text-muted-foreground/60 text-xs mt-1">Add a client and record their first transaction.</p>
           </div>
         ) : (
           <div className="divide-y divide-border/60">
             {recentTxns.map(t => {
-              const client = clients.find(c => c.id === t.clientId);
+              const client = clients.find(c => c.id === t.client_id);
               return (
                 <div key={t.id} className="flex items-center justify-between px-6 py-3.5 hover:bg-muted/30 transition-colors">
                   <div className="flex items-center gap-3">
-                    <div className={`rounded-lg p-1.5 ${t.type === 'debt' ? 'bg-destructive/8' : 'bg-success/8'}`}>
-                      {t.type === 'debt'
-                        ? <ArrowUpRight className="h-4 w-4 text-destructive" />
-                        : <ArrowDownRight className="h-4 w-4 text-success" />
-                      }
+                    <div className={`rounded-lg p-1.5 ${t.type === "debt" ? "bg-destructive/8" : "bg-success/8"}`}>
+                      {t.type === "debt" ? <ArrowUpRight className="h-4 w-4 text-destructive" /> : <ArrowDownRight className="h-4 w-4 text-success" />}
                     </div>
                     <div>
-                      <p className="font-medium text-sm">{client?.name || 'Unknown'}</p>
+                      <p className="font-medium text-sm">{client?.name || "Unknown"}</p>
                       <p className="text-xs text-muted-foreground">{t.description}</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className={`font-semibold text-sm ${t.type === 'debt' ? 'text-destructive' : 'text-success'}`}>
-                      {t.type === 'debt' ? '+' : '-'}${t.amount.toLocaleString()}
+                    <p className={`font-semibold text-sm ${t.type === "debt" ? "text-destructive" : "text-success"}`}>
+                      {t.type === "debt" ? "+" : "-"}${t.amount.toLocaleString()}
                     </p>
                     <p className="text-[11px] text-muted-foreground">{new Date(t.date).toLocaleDateString()}</p>
                   </div>

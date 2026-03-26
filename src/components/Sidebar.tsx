@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, Users, FileText, ChevronRight } from "lucide-react";
+import { LayoutDashboard, Users, FileText, TrendingDown, CreditCard, LogOut, ChevronRight } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 import logo from "@/assets/harzan-logo.gif";
 
 interface SidebarProps {
@@ -8,12 +9,16 @@ interface SidebarProps {
 }
 
 const navItems = [
-  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { id: 'clients', label: 'Clients', icon: Users },
-  { id: 'invoices', label: 'Invoices', icon: FileText },
+  { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { id: "clients", label: "Clients", icon: Users },
+  { id: "debts", label: "Debts", icon: TrendingDown },
+  { id: "payments", label: "Payments", icon: CreditCard },
+  { id: "invoices", label: "Invoices", icon: FileText },
 ];
 
 export default function AppSidebar({ active, onNavigate }: SidebarProps) {
+  const { signOut, user } = useAuth();
+
   return (
     <aside className="sidebar-gradient min-h-screen w-[260px] flex flex-col py-8 px-5 no-print border-r border-sidebar-border">
       <div className="flex flex-col items-center mb-12 px-3">
@@ -25,9 +30,7 @@ export default function AppSidebar({ active, onNavigate }: SidebarProps) {
         </span>
       </div>
 
-      <p className="text-[10px] uppercase tracking-[0.15em] font-semibold text-sidebar-foreground/30 px-3 mb-3">
-        Menu
-      </p>
+      <p className="text-[10px] uppercase tracking-[0.15em] font-semibold text-sidebar-foreground/30 px-3 mb-3">Menu</p>
 
       <nav className="flex flex-col gap-1 flex-1">
         {navItems.map(item => (
@@ -48,7 +51,14 @@ export default function AppSidebar({ active, onNavigate }: SidebarProps) {
         ))}
       </nav>
 
-      <div className="px-3 pt-6 border-t border-sidebar-border">
+      <div className="px-3 pt-4 border-t border-sidebar-border space-y-3">
+        <p className="text-[11px] text-sidebar-foreground/50 truncate">{user?.email}</p>
+        <button
+          onClick={signOut}
+          className="flex items-center gap-2 text-sidebar-foreground/50 hover:text-sidebar-foreground text-sm transition-colors w-full"
+        >
+          <LogOut className="h-4 w-4" /> Sign Out
+        </button>
         <p className="text-[10px] text-sidebar-foreground/30">© 2026 Harzan Travel</p>
       </div>
     </aside>
