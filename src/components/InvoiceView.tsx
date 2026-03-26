@@ -1,6 +1,7 @@
-import { Plane, Printer } from "lucide-react";
+import { Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Invoice, getClients, getTransactions } from "@/lib/store";
+import logo from "@/assets/harzan-logo.gif";
 
 interface Props {
   invoice: Invoice;
@@ -18,10 +19,7 @@ export default function InvoiceView({ invoice }: Props) {
   return (
     <div id="invoice-print">
       <div className="text-center mb-6 border-b border-border pb-4">
-        <div className="flex items-center justify-center gap-2 mb-1">
-          <Plane className="h-5 w-5 text-accent" />
-          <h2 className="font-display text-xl font-bold">Harzan Travel</h2>
-        </div>
+        <img src={logo} alt="Harzan Travel" className="h-16 mx-auto mb-1" />
         <p className="text-xs text-muted-foreground">Travel Accounting Invoice</p>
       </div>
 

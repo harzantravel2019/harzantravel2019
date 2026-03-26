@@ -1,5 +1,6 @@
-import { LayoutDashboard, Users, FileText, Plane } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { LayoutDashboard, Users, FileText } from "lucide-react";
+import logo from "@/assets/harzan-logo.gif";
 
 interface SidebarProps {
   active: string;
@@ -15,14 +16,9 @@ const navItems = [
 export default function AppSidebar({ active, onNavigate }: SidebarProps) {
   return (
     <aside className="navy-gradient min-h-screen w-64 flex flex-col py-6 px-4 no-print">
-      <div className="flex items-center gap-3 px-3 mb-10">
-        <div className="gold-gradient rounded-lg p-2">
-          <Plane className="h-6 w-6 text-primary" />
-        </div>
-        <div>
-          <h1 className="font-display text-lg font-bold text-primary-foreground">Harzan Travel</h1>
-          <p className="text-xs text-sidebar-foreground/60">Accounting System</p>
-        </div>
+      <div className="flex flex-col items-center mb-10 px-3">
+        <img src={logo} alt="Harzan Travel" className="h-20 w-20 object-contain mb-2" />
+        <p className="text-xs text-sidebar-foreground/60">Accounting System</p>
       </div>
 
       <nav className="flex flex-col gap-1 flex-1">

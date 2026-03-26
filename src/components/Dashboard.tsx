@@ -9,7 +9,7 @@ export default function Dashboard() {
   const outstanding = totalDebts - totalPayments;
 
   const stats = [
-    { label: 'Total Clients', value: clients.length, icon: Users, color: 'bg-primary' },
+    { label: 'Total Clients', value: clients.length, icon: Users, color: 'brand-gradient' },
     { label: 'Total Debts', value: `$${totalDebts.toLocaleString()}`, icon: TrendingDown, color: 'bg-destructive' },
     { label: 'Total Payments', value: `$${totalPayments.toLocaleString()}`, icon: TrendingUp, color: 'bg-success' },
     { label: 'Outstanding', value: `$${outstanding.toLocaleString()}`, icon: DollarSign, color: 'bg-accent' },
