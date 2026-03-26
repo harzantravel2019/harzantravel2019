@@ -8,9 +8,9 @@ const Index = () => {
   const [page, setPage] = useState('dashboard');
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-background">
       <AppSidebar active={page} onNavigate={setPage} />
-      <main className="flex-1 p-6 lg:p-8 overflow-auto">
+      <main className="flex-1 p-8 lg:p-10 overflow-auto max-w-[1200px]">
         {page === 'dashboard' && <Dashboard />}
         {page === 'clients' && <ClientsPage />}
         {page === 'invoices' && <InvoicesPage />}
