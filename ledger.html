@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HARZAN TRAVEL | Debts & Payments</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="ledger">
+  <div class="workspace-shell">
+    <div class="workspace-body">
+      <aside class="app-sidebar">
+        <a class="logo-card" href="index.html">
+          <img src="assets/img/harzan-logo.jpg" alt="HARZAN TRAVEL logo">
+          <span class="logo-subtitle">Accounting Portal</span>
+        </a>
+
+        <nav class="sidebar-nav" aria-label="Main navigation">
+          <a href="index.html" data-nav="dashboard">Dashboard</a>
+          <a href="clients.html" data-nav="clients">Clients</a>
+          <a href="ledger.html" data-nav="ledger">Debts &amp; Payments</a>
+          <a href="client-debts.html" data-nav="clientdebts">Client Debts</a>
+          <a href="statements.html" data-nav="statements">Debt &amp; Payment History</a>
+        </nav>
+
+        <div class="sidebar-note">
+          Register each debt and payment entry with clear references so statements stay accurate.
+        </div>
+      </aside>
+
+      <div class="content-shell">
+        <header class="content-topbar">
+          <div>
+            <span class="page-kicker">Ledger Management</span>
+            <h2>Debts &amp; Payments</h2>
+            <p class="page-subtitle">Track outstanding client amounts and received payments.</p>
+          </div>
+
+          <div class="topbar-actions">
+            <div class="search-pill">Debt and payment posting workspace</div>
+            <div class="profile-chip">
+              <span class="avatar-circle">HT</span>
+              <div>
+                <strong>User Profile</strong>
+                <span>Agency Admin</span>
+              </div>
+            </div>
+            <div class="bell-chip">✦</div>
+          </div>
+        </header>
+
+        <main class="page-shell">
+          <section class="page-intro">
+            <div>
+              <span class="eyebrow">Ledger Entries</span>
+              <h2>Post travel debt, receive payments, and monitor balances by client.</h2>
+            </div>
+            <div id="ledger-page-stats" class="chip-row"></div>
+          </section>
+
+          <section class="panel-grid form-layout">
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <span class="eyebrow">Entry Form</span>
+                  <h3 id="transaction-form-title">Add Debt or Payment</h3>
+                </div>
+                <button class="ghost-button" id="transaction-form-reset" type="button">Clear Form</button>
+              </div>
+
+              <form id="transaction-form" class="form-grid">
+                <input type="hidden" name="id" id="transaction-id">
+
+                <label class="field-span-2">
+                  Client
+                  <select name="clientId" id="transaction-client" required></select>
+                </label>
+
+                <label>
+                  Entry Type
+                  <select name="type" id="transaction-type" required>
+                    <option value="debt">Debt</option>
+                    <option value="payment">Payment</option>
+                  </select>
+                </label>
+
+                <label>
+                  Amount
+                  <input type="number" name="amount" id="transaction-amount" min="0.01" step="0.01" placeholder="0.00" required>
+                </label>
+
+                <label>
+                  Currency
+                  <select name="currency" id="transaction-currency" required>
+                    <option value="USD">USD</option>
+                    <option value="IQD">IQD</option>
+                    <option value="EUR">EUR</option>
+                  </select>
+                </label>
+
+                <label>
+                  Date
+                  <input type="date" name="date" id="transaction-date" required>
+                </label>
+
+                <label>
+                  Payment Method
+                  <input type="text" name="method" id="transaction-method" placeholder="Cash, transfer, card...">
+                </label>
+
+                <label>
+                  Reference
+                  <input type="text" name="reference" id="transaction-reference" placeholder="Invoice, ticket, receipt number">
+                </label>
+
+                <label class="field-span-2">
+                  Notes
+                  <textarea name="notes" id="transaction-notes" rows="4" placeholder="Service details or payment explanation"></textarea>
+                </label>
+
+                <div class="form-actions field-span-2">
+                  <button class="primary-button" type="submit" id="transaction-submit">Save Entry</button>
+                  <span class="inline-status" id="transaction-status" aria-live="polite"></span>
+                </div>
+              </form>
+            </article>
+
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <span class="eyebrow">Ledger Table</span>
+                  <h3>Debt &amp; Payment Entries</h3>
+                </div>
+              </div>
+
+              <div class="toolbar toolbar-split">
+                <label class="toolbar-search">
+                  <span>Search</span>
+                  <input type="search" id="transaction-search" placeholder="Search client, reference, method, notes">
+                </label>
+                <label>
+                  Client Filter
+                  <select id="transaction-filter-client"></select>
+                </label>
+                <label>
+                  Type Filter
+                  <select id="transaction-filter-type">
+                    <option value="all">All Types</option>
+                    <option value="debt">Debt</option>
+                    <option value="payment">Payment</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Client</th>
+                      <th>Type</th>
+                      <th>Amount</th>
+                      <th>Reference</th>
+                      <th>Notes</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="transaction-table-body"></tbody>
+                </table>
+              </div>
+            </article>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">Outstanding Review</span>
+                <h3>Balances by Client</h3>
+              </div>
+            </div>
+            <div id="ledger-balance-list" class="stack-list"></div>
+          </section>
+
+          <footer class="page-footer">
+            <span>Every ledger change updates the statement page instantly.</span>
+            <span>&copy; <span data-year></span> HARZAN TRAVEL</span>
+          </footer>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/ledger.js"></script>
+</body>
+</html>
+
+

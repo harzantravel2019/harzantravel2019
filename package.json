@@ -1,0 +1,9 @@
+﻿{
+  "name": "harzan-travel-accounting",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local travel agency accounting system for HARZAN TRAVEL",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

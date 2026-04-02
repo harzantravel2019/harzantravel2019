@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HARZAN TRAVEL | Clients</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="clients">
+  <div class="workspace-shell">
+    <div class="workspace-body">
+      <aside class="app-sidebar">
+        <a class="logo-card" href="index.html">
+          <img src="assets/img/harzan-logo.jpg" alt="HARZAN TRAVEL logo">
+          <span class="logo-subtitle">Accounting Portal</span>
+        </a>
+
+        <nav class="sidebar-nav" aria-label="Main navigation">
+          <a href="index.html" data-nav="dashboard">Dashboard</a>
+          <a href="clients.html" data-nav="clients">Clients</a>
+          <a href="ledger.html" data-nav="ledger">Debts &amp; Payments</a>
+          <a href="client-debts.html" data-nav="clientdebts">Client Debts</a>
+          <a href="statements.html" data-nav="statements">Debt &amp; Payment History</a>
+        </nav>
+
+        <div class="sidebar-note">
+          Build and maintain accurate client records before posting accounting entries.
+        </div>
+      </aside>
+
+      <div class="content-shell">
+        <header class="content-topbar">
+          <div>
+            <span class="page-kicker">Client Records</span>
+            <h2>Clients</h2>
+            <p class="page-subtitle">Add, edit, and remove HARZAN TRAVEL customer profiles.</p>
+          </div>
+
+          <div class="topbar-actions">
+            <div class="search-pill">Client directory and profile management</div>
+            <div class="profile-chip">
+              <span class="avatar-circle">HT</span>
+              <div>
+                <strong>User Profile</strong>
+                <span>Agency Admin</span>
+              </div>
+            </div>
+            <div class="bell-chip">✦</div>
+          </div>
+        </header>
+
+        <main class="page-shell">
+          <section class="page-intro">
+            <div>
+              <span class="eyebrow">Client Management</span>
+              <h2>Create travel client profiles with contact and service information.</h2>
+            </div>
+            <div id="client-page-stats" class="chip-row"></div>
+          </section>
+
+          <section class="panel-grid form-layout">
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <span class="eyebrow">Record Editor</span>
+                  <h3 id="client-form-title">Add New Client</h3>
+                </div>
+                <button class="ghost-button" id="client-form-reset" type="button">Clear Form</button>
+              </div>
+
+              <form id="client-form" class="form-grid">
+                <input type="hidden" name="id" id="client-id">
+
+                <label>
+                  Client Code
+                  <input type="text" name="code" id="client-code" placeholder="Auto generated if empty">
+                </label>
+
+                <label>
+                  Full Name
+                  <input type="text" name="name" id="client-name" placeholder="Client full name" required>
+                </label>
+
+                <label>
+                  Phone Number
+                  <input type="tel" name="phone" id="client-phone" placeholder="+964 ...">
+                </label>
+
+                <label>
+                  Passport Number
+                  <input type="text" name="passportNumber" id="client-passport" placeholder="Passport / ID">
+                </label>
+
+                <label>
+                  Email
+                  <input type="email" name="email" id="client-email" placeholder="client@email.com">
+                </label>
+
+                <label>
+                  Travel Service
+                  <input type="text" name="travelService" id="client-service" placeholder="Ticket, visa, hotel package...">
+                </label>
+
+                <label class="field-span-2">
+                  Notes
+                  <textarea name="notes" id="client-notes" rows="4" placeholder="Important travel details or internal notes"></textarea>
+                </label>
+
+                <div class="form-actions field-span-2">
+                  <button class="primary-button" type="submit" id="client-submit">Save Client</button>
+                  <span class="inline-status" id="client-status" aria-live="polite"></span>
+                </div>
+              </form>
+            </article>
+
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <span class="eyebrow">Directory</span>
+                  <h3>Client List</h3>
+                </div>
+              </div>
+
+              <div class="toolbar">
+                <label class="toolbar-search">
+                  <span>Search</span>
+                  <input type="search" id="client-search" placeholder="Search by name, code, phone, passport">
+                </label>
+              </div>
+
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Client</th>
+                      <th>Contact</th>
+                      <th>Travel Service</th>
+                      <th>Balance</th>
+                      <th>Updated</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="client-table-body"></tbody>
+                </table>
+              </div>
+            </article>
+          </section>
+
+          <footer class="page-footer">
+            <span>Client records connect directly to debts, payments, and statements.</span>
+            <span>&copy; <span data-year></span> HARZAN TRAVEL</span>
+          </footer>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/clients.js"></script>
+</body>
+</html>
+
+

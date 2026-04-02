@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HARZAN TRAVEL | Dashboard</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="dashboard">
+  <div class="workspace-shell">
+    <div class="workspace-body">
+      <aside class="app-sidebar">
+        <a class="logo-card" href="index.html">
+          <img src="assets/img/harzan-logo.jpg" alt="HARZAN TRAVEL logo">
+          <span class="logo-subtitle">Accounting Portal</span>
+        </a>
+
+        <nav class="sidebar-nav" aria-label="Main navigation">
+          <a href="index.html" data-nav="dashboard">Dashboard</a>
+          <a href="clients.html" data-nav="clients">Clients</a>
+          <a href="ledger.html" data-nav="ledger">Debts &amp; Payments</a>
+          <a href="client-debts.html" data-nav="clientdebts">Client Debts</a>
+          <a href="statements.html" data-nav="statements">Debt &amp; Payment History</a>
+        </nav>
+
+        <div class="sidebar-note">
+          Internal workspace for client balances, travel debt, payment follow-up, and statement archiving.
+        </div>
+      </aside>
+
+      <div class="content-shell">
+        <header class="content-topbar">
+          <div>
+            <span class="page-kicker">Accounting Portal</span>
+            <h2>Dashboard</h2>
+            <p class="page-subtitle">A live overview of HARZAN TRAVEL accounting activity.</p>
+          </div>
+
+          <div class="topbar-actions">
+            <div class="search-pill">HARZAN TRAVEL finance workspace</div>
+            <div class="profile-chip">
+              <span class="avatar-circle">HT</span>
+              <div>
+                <strong>User Profile</strong>
+                <span>Agency Admin</span>
+              </div>
+            </div>
+            <div class="bell-chip">✦</div>
+          </div>
+        </header>
+
+        <main class="page-shell">
+          <section class="page-intro weekly-debt-summary" id="weekly-debt-summary"></section>
+
+          <section class="stats-grid" id="dashboard-metrics"></section>
+
+          <section class="panel-grid panel-grid-2">
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <span class="eyebrow">Recent Transactions</span>
+                  <h3>Latest Activity</h3>
+                </div>
+              </div>
+              <div id="recent-activity"></div>
+            </article>
+
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <span class="eyebrow">Balance Snapshot</span>
+                  <h3>Client Balances</h3>
+                </div>
+              </div>
+              <div id="balance-snapshot" class="stack-list"></div>
+            </article>
+          </section>
+
+          <footer class="page-footer">
+            <span>HARZAN TRAVEL accounting portal.</span>
+            <span>&copy; <span data-year></span> HARZAN TRAVEL</span>
+          </footer>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/home.js"></script>
+</body>
+</html>
+
+
+

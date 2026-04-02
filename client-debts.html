@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HARZAN TRAVEL | Client Debts</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="clientdebts">
+  <div class="workspace-shell">
+    <div class="workspace-body">
+      <aside class="app-sidebar">
+        <a class="logo-card" href="index.html">
+          <img src="assets/img/harzan-logo.jpg" alt="HARZAN TRAVEL logo">
+          <span class="logo-subtitle">Accounting Portal</span>
+        </a>
+
+        <nav class="sidebar-nav" aria-label="Main navigation">
+          <a href="index.html" data-nav="dashboard">Dashboard</a>
+          <a href="clients.html" data-nav="clients">Clients</a>
+          <a href="ledger.html" data-nav="ledger">Debts &amp; Payments</a>
+          <a href="client-debts.html" data-nav="clientdebts">Client Debts</a>
+          <a href="statements.html" data-nav="statements">Debt &amp; Payment History</a>
+        </nav>
+
+        <div class="sidebar-note">
+          Review client debt-only accounts and prepare invoice PDFs from debt records.
+        </div>
+      </aside>
+
+      <div class="content-shell">
+        <header class="content-topbar">
+          <div>
+            <span class="page-kicker">Debt Invoices</span>
+            <h2>Client Debts</h2>
+            <p class="page-subtitle">Show each client's debt history and export a modern invoice PDF.</p>
+          </div>
+
+          <div class="topbar-actions">
+            <div class="search-pill">Debt-only client invoice workspace</div>
+            <div class="profile-chip">
+              <span class="avatar-circle">HT</span>
+              <div>
+                <strong>User Profile</strong>
+                <span>Agency Admin</span>
+              </div>
+            </div>
+            <div class="bell-chip">✦</div>
+          </div>
+        </header>
+
+        <main class="page-shell">
+          <section class="page-intro">
+            <div>
+              <span class="eyebrow">Debt Directory</span>
+              <h2>Review debt-only client accounts and print invoice PDFs in one place.</h2>
+              <p class="lead">This page excludes payments and focuses only on debt entries recorded for each client.</p>
+            </div>
+            <div id="client-debts-stats" class="chip-row"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">Debt Table</span>
+                <h3>Client Debt List</h3>
+              </div>
+            </div>
+
+            <div class="toolbar">
+              <label class="toolbar-search">
+                <span>Search</span>
+                <input type="search" id="client-debts-search" placeholder="Search by client name, code, or number">
+              </label>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Client</th>
+                    <th>Number</th>
+                    <th>Debt Details</th>
+                    <th>Total Debt</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="client-debts-table-body"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <footer class="page-footer">
+            <span>Invoice PDFs are generated from debt entries only.</span>
+            <span>&copy; <span data-year></span> HARZAN TRAVEL</span>
+          </footer>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/client-debts.js"></script>
+</body>
+</html>
+
